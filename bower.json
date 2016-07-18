@@ -1,0 +1,23 @@
+{
+  "name": "seperpay",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Amazingandyyy"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/amazingandyyy/seperpay2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "font-awesome": "^4.6.3",
+    "jquery": "^3.1.0"
+  }
+}
