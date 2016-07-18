@@ -1,5 +1,7 @@
-@import "myvariables";
+@import "variables";
 @import "override";
+@import "responsive";
+
 body {
     font-family: 'Lato', 'helvetica neue',helvetica,arial,sans-serif !important;
     hr.small {
@@ -12,7 +14,6 @@ body {
         letter-spacing: 1px;
         margin: 10px auto 20px;
         border: none;
-        border-radius: 0;
         width: 100%;
         background: $brand-primary;
         color: white;
@@ -35,7 +36,6 @@ body {
         letter-spacing: 1px;
         margin: 10px auto 20px;
         border: none;
-        border-radius: 0;
         width: 100%;
         background: lighten($brand-secondary, 5%);
         color: white;
@@ -102,4 +102,12 @@ body {
             }
         }
     }
+}
+
+
+@media (min-width: 767px) {
+    // on desktop
+}
+@media (max-width: 767px) {
+    // on mobile specific - deprecated
 }
