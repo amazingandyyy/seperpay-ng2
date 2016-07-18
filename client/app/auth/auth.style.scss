@@ -1,17 +1,15 @@
-@import "../myvariables";
+@import "../../scss/variables";
 .auth-page {
     text-align: center;
     padding-top: 50px;
     .auth-container {
         width: 100%;
-        // border: 1px solid red;
         img.logo {
             width: 50px;
             margin-bottom: 40px;
             font-family: sans-serif;
         }
         .form-item {
-            // border: 1px solid red;
             width: 100%;
             margin: auto;
             padding: 0;

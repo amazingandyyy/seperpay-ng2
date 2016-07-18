@@ -22,7 +22,7 @@ var tsProject = typescript.createProject('tsconfig.json');
 // gulp.task('default', ['watch', 'build-ts', 'build-copy']);
 gulp.task('default', ['build', 'serve', 'watch']);
 gulp.task('build', ['js', 'css', 'html', 'assets']);
-gulp.task('serve', function() {
+gulp.task('serve', function () {
     nodemon({
         script: './app.js',
         ext: 'js css ejs html',
@@ -38,14 +38,14 @@ gulp.task('js', function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(appProd));
 });
-gulp.task('clean:js', function() {
+gulp.task('clean:js', function () {
     return gulp.src('public/js/app', {
-            read: false
-        })
+        read: false
+    })
         .pipe(rimraf());
 });
 
-gulp.task('css', ['clean:css'], function() {
+gulp.task('css', ['clean:css', 'app:css'], function () {
     return gulp.src(['client/scss/**/*.scss', 'client/scss/**/*.sass'])
         .pipe(sourcemaps.init())
         .pipe(plumber())
@@ -55,16 +55,30 @@ gulp.task('css', ['clean:css'], function() {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('public/css'));
 });
-
-gulp.task('clean:css', function() {
+gulp.task('clean:css', function () {
     return gulp.src('public/css', {
-            read: false
-        })
+        read: false
+    })
         .pipe(rimraf());
 });
-
-gulp.task('html', function() {
-    return gulp.src(appDev+'**/*.html')
+gulp.task('app:css', ['app:clean:css'],function () {
+    return gulp.src(appDev + '**/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(plumber())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(cleanCSS())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(appProd));
+});
+gulp.task('app:clean:css', function () {
+    return gulp.src(appProd + '**/*.css', {
+        read: false
+    })
+        .pipe(rimraf());
+});
+gulp.task('html', function () {
+    return gulp.src(appDev + '**/*.html')
         .pipe(gulp.dest(appProd));
 });
 
@@ -77,22 +91,24 @@ gulp.task('watch', function () {
     gulp.watch(appDev + '**/*.ts', ['js']);
     gulp.watch('client/scss/**/*.scss', ['css']);
     gulp.watch(appDev + '**/*.{html,htm}', ['html']);
+    gulp.watch(appDev + '**/*.scss', ['app:css']);
+    gulp.watch('gulpfile.js', ['build']);
     // gulp.watch('public/assets/**', ['assets']);
 });
 
-gulp.task('assets',['clean:assets'], function() {
+gulp.task('assets', ['clean:assets'], function () {
     return gulp.src('client/assets/**')
         .pipe(gulp.dest('public/assets'));
 });
 
-gulp.task('clean:assets', function() {
+gulp.task('clean:assets', function () {
     return gulp.src('public/assets', {
-            read: false
-        })
+        read: false
+    })
         .pipe(rimraf());
 });
 
-gulp.task('vendor', function() {
+gulp.task('vendor', function () {
 
     // Angular 2 Framework
     gulp.src('node_modules/@angular/**')

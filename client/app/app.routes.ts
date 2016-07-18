@@ -4,7 +4,7 @@ import { AuthComponent } from './auth/auth.component';
 
 let routes: RouterConfig = [
   {
-    path: 'landing',
+    path: '',
     component: LandingComponent,
   },
   {
@@ -19,7 +19,7 @@ let routes: RouterConfig = [
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: '/',
     terminal: true
   }
 ];

@@ -8,4 +8,4 @@ import { Location, LocationStrategy, HashLocationStrategy} from '@angular/common
 bootstrap(AppComponent, [
     appRouterProviders,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
-]);
+]).catch((err: any) => console.error(err));
