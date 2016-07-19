@@ -19,13 +19,15 @@ router.get('/currentUser', User.authMiddleware, function(req, res) {
     res.send(req.user)
 })
 
-router.post('/signup', function(req, res) {
-    User.enterSystem(req.body, (err, token) => {
-        if (err) return res.status(409).send(err)
-        res.send({
-            token: token
-        })
-    })
+router.post('/logUserIn', function(req, res) {
+    console.log('check')
+    console.log(req.body);
+    // User.enterSystem(req.body, (err, token) => {
+    //     if (err) return res.status(409).send(err)
+    //     res.send({
+    //         token: token
+    //     })
+    // })
 })
 
 //
