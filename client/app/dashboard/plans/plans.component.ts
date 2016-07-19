@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'sp-payment',
-    templateUrl: 'payment.component.html'
+    selector: 'sp-plans',
+    templateUrl: 'plans.component.html'
 })
-export class PaymentComponent {
+export class PlansComponent {
     constructor() { }
 }

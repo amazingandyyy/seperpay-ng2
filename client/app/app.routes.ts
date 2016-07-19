@@ -13,21 +13,16 @@ let routes: RouterConfig = [
   },
   {
     path: 'auth',
-    component: AuthComponent,
-    data: {
-      item: {
-        title: 'login',
-        description: 'login to dashboard'
-      }
-    }
+    component: AuthComponent
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
     children: [
+      { path: '',         component: DashboardComponent },
       { path: 'payment',  component: PaymentComponent },
-      { path: 'plans',     component: PlansComponent },
-      { path: 'account',     component: AccountComponent }
+      { path: 'plans',    component: PlansComponent },
+      { path: 'account',  component: AccountComponent }
     ]
   },
   {
