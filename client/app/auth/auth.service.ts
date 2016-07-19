@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Auth } from './auth'
 import 'rxjs/operator';
+
+import { Auth } from './auth';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,13 @@ export class AuthService {
         console.log(data);
         return this.http.post('/api/auth/logUserIn', data)
             .toPromise()
-            .then((res: Response) => console.log(res))
+            .then(this.handelResponse)
             .catch((err: any) => console.log('err when logUserIn @auth.service.ts'));
     }
+
+    private handelResponse(res: Response) {
+        let token = res.json()
+        return token || {};
+    }
+
 }
