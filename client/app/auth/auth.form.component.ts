@@ -10,4 +10,8 @@ import { Auth } from './auth';
     styleUrls: ['auth.form.style.css']
 })
 export class AuthFormComponent {
+    onSubmit(auth: Auth) {
+        console.log('submitted');
+        console.log('auth: ', auth);
+    }
 }

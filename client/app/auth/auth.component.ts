@@ -10,8 +10,4 @@ import { AuthFormComponent } from './auth.form.component';
 })
 
 export class AuthComponent {
-    auth_enter(auth) {
-        console.log('submitted');
-        console.log('auth: ', auth);
-    }
 }

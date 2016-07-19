@@ -1,12 +1,26 @@
-<form (ngSubmit)='auth_enter(auth)'>
+<form (ngSubmit)='onSubmit(authForm.value)' #authForm="ngForm">
     <div class="form-item">
-        <input required type="email" (ngModel)="auth.email" placeholder="Email address">
+        <input required type="email" 
+        (ngModel)="auth.email" 
+        placeholder="Email address"
+        name="email"
+        #email="ngModel">
     </div>
     <div class="form-item">
-        <input required type="password" (ngModel)="auth.password" placeholder="Password" class="password">
+        <input required type="password"
+        (ngModel)="auth.password"
+        placeholder="Password" 
+        class="password"
+        name="password"
+        #password="ngModel">
         <span class="lock"><i class="fa fa-lock"></i></span>
+        <!--<h1 *ngIf="password.value">{{password.value}}dfdsf</h1>-->
     </div>
+    
     <div class="form-item">
-        <button type="submit" class="btn btn-primary responsive">Log in</button>
+        <button type="submit" class="btn btn-primary responsive"
+        [disabled]="!authForm.form.valid">
+            Log in
+        </button>
     </div>
 </form>
