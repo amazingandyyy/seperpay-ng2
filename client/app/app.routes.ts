@@ -1,10 +1,8 @@
 import { provideRouter, RouterConfig } from '@angular/router';
+
 import { LandingComponent } from './landing/landing.component'
 import { AuthComponent } from './auth/auth.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { PaymentComponent } from './dashboard/payment/payment.component';
-import { PlansComponent } from './dashboard/plans/plans.component';
-import { AccountComponent } from './dashboard/account/account.component';
+import { dashboardRoutes } from './dashboard/dashboard.routes';
 
 let routes: RouterConfig = [
   {
@@ -15,16 +13,7 @@ let routes: RouterConfig = [
     path: 'auth',
     component: AuthComponent
   },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    children: [
-      { path: '',         component: DashboardComponent },
-      { path: 'payment',  component: PaymentComponent },
-      { path: 'plans',    component: PlansComponent },
-      { path: 'account',  component: AccountComponent }
-    ]
-  },
+  ...dashboardRoutes,
   {
     path: '**',
     redirectTo: '/',
