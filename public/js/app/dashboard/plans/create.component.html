@@ -55,8 +55,8 @@
                         <br>
                     </div>
                     <br>
-                    <div ng-init="updateTimes(plan.times)" class="installmentsGraphContainer">
-                        <div class="graph-item" ng-repeat="installment in installmentsGraphData" ng-style="installment.style"></div>
+                    <div class="installmentsGraphContainer">
+                        <div class="graph-item"  *ngFor="let installment of getInstallmentsDate(installmentsTimes.value)" [style.height.px]="150-getInstallmentsDate(installmentsTimes.value).length*10"></div>
                         <!-- <div class="graph-item" ng-repeat="installment in installmentsGraphData" ng-style="installment.style"><span ng-if="installmentsGraphData.length < 6 || ($index % 2 == 0)">{{(plan.total-plan.downpay)/plan.times | currency}}</span></div> -->
                     </div>
                 </div>

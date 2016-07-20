@@ -12,20 +12,29 @@ import { Plan } from './plan';
 export class CreateComponent {
     constructor() { }
 
-    intervalType = '';
     plan = new Plan(0, 0, '', 3);
+    intervalType: string;
 
     onSubmit(plan: any) {
+        plan.intervalType = this.intervalType;
         console.log('plan: ', plan);
+        // do service to save the plan
     }
 
     intervalSelected(interval: string){
-        console.log('interval: ', interval);
         this.plan.intervalType = interval;
         this.intervalType = interval
     }
 
     showCurrency(singlePayment: number){
         return `$${(~~(singlePayment*100)/100)}`
+    }
+
+    getInstallmentsDate(installments: number) {
+        let array = [];
+        for(let i = 0 ; i < installments ; i++) {
+            array.push('installment');
+        }
+        return array;
     }
 }
