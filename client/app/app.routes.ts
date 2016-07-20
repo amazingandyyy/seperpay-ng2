@@ -25,4 +25,3 @@ export const appRouterProviders = [
   provideRouter(routes)
 ];
 
-// tutorials: http://plnkr.co/edit/5ATJapZqtV5ieLJx4f2o?p=preview

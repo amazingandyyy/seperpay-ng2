@@ -10,4 +10,4 @@ import { AuthFormComponent } from './auth.form.component';
 })
 
 export class AuthComponent {
-}
+}  

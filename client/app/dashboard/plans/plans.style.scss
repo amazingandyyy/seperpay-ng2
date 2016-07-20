@@ -156,6 +156,7 @@
     .plan_section {
         h1.title {
             font-size: 200%;
+            overflow-x: scroll; 
         }
         input.totalPrice {
             width: 40%;
