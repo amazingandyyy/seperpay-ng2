@@ -1,5 +1,5 @@
-@import "../../scss/variables";
-@import "../../scss/global";
+@import "../shared/scss/variables";
+@import "../shared/scss/global";
 
 .form-item {
     width: 100%;
@@ -26,8 +26,6 @@
         &.password {
             padding-right: 45px !important;
         }
-
-        
     }
     
     span.lock {

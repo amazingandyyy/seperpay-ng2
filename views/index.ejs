@@ -18,9 +18,7 @@
     <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css' />
     <!-- Load css libraries over -->
 
-    <!-- Load in css stylesheet start -->
-    <link rel='stylesheet' href='/css/style.css'/>
-    <!-- Load in css stylesheet over -->
+    
 
     <!-- Load libraries start -->
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -47,10 +45,14 @@
     <!-- Configure SystemJS over -->
 </head>
 <body>
-<sp-app>Loading...</sp-app>
+    <sp-app>Loading...</sp-app>
 
-<script>
-    System.import('app').catch(function(err){ console.error(err);  });
-</script>
+
+    <script>
+        System.import('app').catch(function(err){ console.error(err);  });
+    </script>
+    <!-- Load in css stylesheet start -->
+    <link rel='stylesheet' href='/css/style.css'/>
+    <!-- Load in css stylesheet over -->
 </body>
 </html>
