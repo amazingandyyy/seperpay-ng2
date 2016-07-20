@@ -2,6 +2,7 @@
 @import "../../shared/scss/global";
 
 .section {
+    overflow: hidden;
     background: white;
     text-align: center;
     padding: 20px 5px;
@@ -156,6 +157,7 @@
     .plan_section {
         h1.title {
             font-size: 200%;
+            overflow-y: hidden;
             overflow-x: scroll; 
         }
         input.totalPrice {

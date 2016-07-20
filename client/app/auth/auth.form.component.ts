@@ -12,8 +12,10 @@ import { Auth } from './auth';
     styleUrls: ['auth.form.style.css'],
     providers: [AuthService]
 })
+
 export class AuthFormComponent implements OnInit {
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authService: AuthService, 
+                private router: Router) { }
 
     onSubmit(auth: Auth) {
         console.log('submitted');
@@ -21,8 +23,10 @@ export class AuthFormComponent implements OnInit {
 
         this.authService.logUserIn(auth)
             .then((res) => { 
-                console.log('good res: ', res)
-                this.router.navigate(['dashboard']);
+                console.log('res from auth: ', res)
+                if(res.token){
+                    this.router.navigate(['dashboard']);
+                }
             }, (err) => {
                 console.log('err res: ', err) 
             })

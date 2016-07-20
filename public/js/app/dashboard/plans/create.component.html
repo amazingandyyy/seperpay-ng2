@@ -1,58 +1,73 @@
+<!--<form (ngSubmit)='onSubmit(planCreateForm.value)' #planCreateForm="ngForm">
+
+    <div class="section" ng-init="plan.type = 'single' ">
+        <h2 class="title">1. Totaly price</h2>
+        <input type="text" class="totalPrice" (ngModel)="plan.totalPrice" #totalPrice placeholder="1299.00"> {{totalPrice.value}}
+    </div>
+    <div class="section">
+        <h2 class="title">2. Down Payment</h2>
+        <h2 class="notes">Down payment will be processed immediately after plan is confirmed by buyer.</h2>
+        <input type="text" class="totalPrice" (ngModel)="plan.downpayment" #downpayment placeholder="300.00">
+    </div>
+    <button type="submit">submit</button>
+</form>-->
+
 <div class="container" style="padding-top: 30px;">
-    <div class="row">
-        <div class="col-sm-8 col-md-8 right_container" style="background: #F7F7F7">
-            <div class="section" ng-init="plan.type = 'single' ">
-                <h2 class="title">1. Totaly price</h2>
-                <input type="text" class="totalPrice" ng-model="plan.total" placeholder="1299.00">
-            </div>
-            <div class="section">
-                <h2 class="title">2. Down Payment</h2>
-                <h2 class="notes">Down payment will be processed immediately after plan is confirmed by buyer.</h2>
-                <input type="text" class="totalPrice" ng-model="plan.downpay" placeholder="300.00">
-            </div>
-            <div class="section animated fadeIn" ng-if="plan.total>1">
-                <h2 class="title">3. Payment Interval</h2>
-                <div class="row">
-                    <div class="col-sm-4 intervalChoice">
-                        <div ng-click="intervalSelected('weekly')" class="choice" ng-class="(plan.interval == 'weekly')? 'selected' : '' ">
-                            Every Week
+    <form (ngSubmit)='onSubmit(planCreateForm.value)' #planCreateForm="ngForm">
+        {{valuesss}}
+        <div class="row">
+            <div class="col-sm-8 col-md-8 right_container" style="background: #F7F7F7">
+                <div class="section" ng-init="plan.type = 'single' ">
+                    <h2 class="title">1. Totaly price</h2>
+                    <input type="text" class="totalPrice" (ngModel)="plan.totalPrice" name="totalPrice" #totalPrice placeholder="1299.00">
+                </div>
+                <div class="section">
+                    <h2 class="title">2. Down Payment</h2>
+                    <h2 class="notes">Down payment will be processed immediately after plan is confirmed by buyer.</h2>
+                    <input type="text" class="totalPrice" [(ngModel)]="plan.downpayment" name="downpayment" #downpayment placeholder="300.00">
+                </div>
+                <div class="section animated fadeIn" ng-if="plan.total>1">
+                    <h2 class="title">3. Payment Interval</h2>
+                    <div class="row">
+                        <div class="col-sm-4 intervalChoice">
+                            <div (click)="intervalSelected('weekly')" class="choice" [class.selected]="plan.intervalType == 'weekly' ">
+                                Every Week
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4 intervalChoice">
-                        <div ng-click="intervalSelected('biweekly')" class="choice" ng-class="(plan.interval == 'biweekly')? 'selected' : '' ">
-                            Every 2 Weeks
+                        <div class="col-sm-4 intervalChoice">
+                            <div (click)="intervalSelected('biweekly')" class="choice" [class.selected]="plan.intervalType == 'biweekly' ">
+                                Every 2 Weeks
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4 intervalChoice">
-                        <div ng-click="intervalSelected('monthly')" class="choice" ng-class="(plan.interval == 'monthly')? 'selected' : '' ">
-                            Every Month
+                        <div class="col-sm-4 intervalChoice">
+                            <div (click)="intervalSelected('monthly')" class="choice" [class.selected]="plan.intervalType == 'monthly' ">
+                                Every Month
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="section animated fadeIn" ng-if="plan.total>1">
-                <h2 class="title">4. How many installments?</h2>
-                <div class="form-item">
-                    <input class="range" type="range" min="1" max="12" ng-init="defaultPlanTimes(plan.times)" ng-model="plan.times" ng-change="updateTimes(plan.times)">
+                <div class="section animated fadeIn" ng-if="plan.total>1">
+                    <h2 class="title">4. How many installments?</h2>
+                    <div class="form-item">
+                        <input class="range" type="range" min="1" max="12" [(ngModel)]="plan.installmentsTimes" name="installmentsTimes" #installmentsTimes />
+                        <br>
+                        <br> <b style="font-size: 200%">{{showCurrency((totalPrice.value-downpayment.value)/installmentsTimes.value)}} for {{installmentsTimes.value}} installments</b>
+                        <br>
+                    </div>
                     <br>
-                    <!--<br> <b style="font-size: 200%">{{((plan.total - plan.downpay) / plan.times) | currency}} for {{plan.times}} installments</b>-->
-                    <br> <b style="font-size: 200%">adfds f dsf dsf sdf df sdf </b>
-                    <br>
+                    <div ng-init="updateTimes(plan.times)" class="installmentsGraphContainer">
+                        <div class="graph-item" ng-repeat="installment in installmentsGraphData" ng-style="installment.style"></div>
+                        <!-- <div class="graph-item" ng-repeat="installment in installmentsGraphData" ng-style="installment.style"><span ng-if="installmentsGraphData.length < 6 || ($index % 2 == 0)">{{(plan.total-plan.downpay)/plan.times | currency}}</span></div> -->
+                    </div>
                 </div>
-                <br>
-                <div ng-init="updateTimes(plan.times)" class="installmentsGraphContainer">
-                    <div class="graph-item" ng-repeat="installment in installmentsGraphData" ng-style="installment.style"></div>
-                    <!-- <div class="graph-item" ng-repeat="installment in installmentsGraphData" ng-style="installment.style"><span ng-if="installmentsGraphData.length < 6 || ($index % 2 == 0)">{{(plan.total-plan.downpay)/plan.times | currency}}</span></div> -->
-                </div>
-            </div>
-            <!-- <div class="section animated flipInY" ng-if="plan.total>1">
+                <!-- <div class="section animated flipInY" ng-if="plan.total>1">
                 <h2 class="title">The first installment date?</h2>
                 <input type="date" min="2016-07-17"><br>
             </div> -->
-        </div>
-        <div class="col-sm-4 col-md-4" style="text-align: center">
-            <div class="singlePlanPreviewSticky">
-                <!-- <svg class="hidden-xs-down" width="100%" style="margin:auto" viewBox="12360 5155 294 181" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            </div>
+            <div class="col-sm-4 col-md-4" style="text-align: center">
+                <div class="singlePlanPreviewSticky">
+                    <!-- <svg class="hidden-xs-down" width="100%" style="margin:auto" viewBox="12360 5155 294 181" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs>
                         <rect id="path-1" x="0" y="0" width="292" height="179" rx="8"></rect>
                         <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-3">
@@ -87,42 +102,42 @@
                         </text>
                     </g>
                 </svg> -->
-                <!--<div class="section summary">
-                    <h2 class="title">Plan Summary</h2>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Total Price: </td>
-                                <td>{{plan.total | currency}}</td>
-                            </tr>
-                            <tr>
-                                <td>Down Payment: </td>
-                                <td>{{plan.downpay | currency}}</td>
-                            </tr>
-                            <tr>
-                                <td>Payment Interval: </td>
-                                <td>{{plan.interval}}</td>
-                            </tr>
-                            <tr>
-                                <td>Plan: </td>
-                                <td ng-if="singlePayment()">
-                                    <span>
-                                    {{singlePayment() | currency}}
+                    <div class="section summary">
+                        <h2 class="title">Plan Summary</h2>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Total Price: </td>
+                                    <td>{{totalPrice.value}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Down Payment: </td>
+                                    <td>{{downpayment.value}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Interval: </td>
+                                    <td>{{intervalType}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Plan: </td>
+                                    <td ng-if="singlePayment()">
+                                        <span>
+                                    {{showCurrency((totalPrice.value-downpayment.value)/installmentsTimes.value)}}
                                     <br>
-                                    for {{plan.times}} installments
+                                    for {{installmentsTimes.value}} installments
                                     </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1st installment date: </td>
-                                <td>{{plan.interval}}</td>
-                            </tr> 
-                        </tbody>
-                    </table>
-                </div>-->
-                <button  type="button" class="btn btn-block btn-primary" ng-click="previewSinglePlan(plan)">next</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1st installment date: </td>
+                                    <!--<td>{{plan.interval}}</td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary" ng-click="previewSinglePlan(plan)">next</button>
+                </div>
             </div>
         </div>
-
-    </div>
+    </form>
 </div>
