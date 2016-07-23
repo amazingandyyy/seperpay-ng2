@@ -124,7 +124,7 @@ function generateToken(data) {
     let payload = {
         _id: data._id,
         iat: Date.now(),
-        exp: moment().add(7, 'day').unix()
+        exp: moment().add(1, 'day').unix()
     };
     let token = jwt.sign(payload, JWT_SECRET);
     return token
