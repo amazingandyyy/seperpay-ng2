@@ -19,7 +19,9 @@ router.get('/currentUser', User.authMiddleware, function(req, res) {
     res.send(req.user)
 })
 
-router.post('/signup', function(req, res) {
+router.post('/logUserIn', function(req, res) {
+    console.log('logUserIn checked')
+    console.log(req.body);
     User.enterSystem(req.body, (err, token) => {
         if (err) return res.status(409).send(err)
         res.send({

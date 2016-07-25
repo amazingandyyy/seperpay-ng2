@@ -1,0 +1,26 @@
+#route tutorial: 
+tutorials: http://plnkr.co/edit/5ATJapZqtV5ieLJx4f2o?p=preview
+- add router to map in /public/systemjs.config.js
+- create app.routes.ts under client, import provideRouter and RouterConfig
+- add appRouterProviders in main.ts and bootstrap it, to make it available for other components
+- import ROUTER_DIRECTIVES from router and add it to directives in app.component.ts
+- now you can put <router-outlet> in the app.template.html file
+- and add [routerLink] directive to the button, and make to direct to [‘/pathName']
+    - another way to go to other states is to
+        - import { Router }      from '@angular/router';
+        - constructor(private router: Router) {
+            }
+            go(desination: string) {
+                this.router.navigate([desination]);
+            }
+- fix refreshing: change in main.ts
+    - import { Location, LocationStrategy, HashLocationStrategy} from '@angular/common';
+    - and bootstrap it:
+        - {provide: LocationStrategy, useClass: HashLocationStrategy}
+
+#user input demo: 
+http://plnkr.co/edit/B0NkoLJ9hC4wNDRDU2gv?p=preview
+
+
+#how to passing value between component demo:
+https://plnkr.co/edit/zFzyTcAJAJ1UAhDr1U3k?p=preview
