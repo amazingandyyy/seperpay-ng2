@@ -10,9 +10,6 @@
     "postinstall": "typings install && bower i && gulp vendor && gulp build",
     "typings": "typings"
   },
-  "engines": {
-    "node": "5.10.1"
-  },
   "author": "Amazingandyyy",
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
